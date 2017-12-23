@@ -12,5 +12,5 @@ public class Character {
 	public Setting1 set;				// gives access to the following variables in the Setting class:
 	public int day;
 	public int time;
-	public String playerName;
+	public Player user;
 }

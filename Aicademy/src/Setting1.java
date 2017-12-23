@@ -6,15 +6,13 @@ public class Setting1{
 	// public variables are used in other classes (generally Characters)
 	// for now at least, rather than using getter methods for these variables
 	public Player user;
-	public int i;			// number of actions successfully completed within the time slot
-	public int day = 0;		// max of 2 actions per time, characters need to reduce i if action is unsuccessful
+	public int day = 0;
 	public int time = 0;
 	public int location;	// 0-2: active, neutral, and passive
+	private int act;		// number of actions successfully completed within the time slot, max of 2 per time
 	private String active;
 	private String neutral;
 	private String passive;
-	public String gender;
-	public String playerName;
 	public boolean single = true;
 	
 	// declares characters so this class can have access to the characters that were created in the main method
@@ -38,8 +36,6 @@ public class Setting1{
 	// user, gender, and playerName as appropriate
 	Setting1(Player p){
 		user = p;
-		gender = user.gender;
-		playerName = user.playerName;
 		sc = user.sc;
 	}
 
@@ -88,6 +84,7 @@ public class Setting1{
 
 			while(time < 3){
 
+				// change this to switch/case
 				if(day == 0)
 					System.out.print("It's Monday ");
 				else if(day == 1)
@@ -122,28 +119,35 @@ public class Setting1{
 	// retrieves the active, neutral, and passive locations specific to the given time and day
 	// allows the character to talk to people or retreat to the passive location
 	private void play(){
-		if(time == 3)
+		if(time == 3){
 			active = "ask someone to hang out";
+			neutral = "call someone";
+		}
 		else switch(day){
 		case 0:	active = monday();
+				break;
 		case 1:	active = tuesday();
+				break;
 		case 2:	active = wednesday();
+				break;
 		case 3:	active = thursday();
+				break;
 		case 4:	active = friday();
+				break;
 		}
 		
 		neutral = getNeutral();
 		passive = getPassive();
 		
 		location = 0;
-		i = 0;	
+		act = 0;	
 		
-		while(i < 2 && location < 3){
+		while(act < 2 && location < 3){
 			int choice = options();
 			
 			if(location > 0 && choice > 2){
 				dialogue(choice);
-				i++;
+				act++;
 			}
 		}
 		
@@ -945,7 +949,9 @@ public class Setting1{
 		else if(time == 2){
 			if(location == 1){
 				switch(choice){
-			case 3:	aE.date();
+			case 3:	if(!aE.date())
+						act--;
+					else act++;
 					break;
 /*			case 4:	aN.date();
 					break;
@@ -972,7 +978,8 @@ public class Setting1{
 			}
 			else if(location == 2){
 				switch(choice){
-			case 3:	aE.call();
+			case 3:	if(!aE.call())
+						act--;
 					break;
 /*			case 4:	aN.call();
 					break;
