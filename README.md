@@ -1,3 +1,4 @@
+# DatingSim
 This is an expanded upon version of my end of year project for AP computer science in senior year of high school.
 
 It is a work in progress.
