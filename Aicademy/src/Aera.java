@@ -1,15 +1,18 @@
 public class Aera extends Character{	
-	// constructor checks to see if genders are compatible and sets set, day, time, location, and playerName to the variables already created in other classes
+	// constructor checks to see if genders are compatible and sets set and user
+	// initializes name of the character (starts out as a description until the name is discovered by talking once)
 	Aera(Setting1 s){
-		name = "the quiet girl with long brown hair";		// initializes name of the character (starts out as a description until the name is discovered by talking once)
+		name = "the quiet girl with long brown hair";
 		set = s;
 		date = true;
 		user = set.user;
 		sc = set.sc;
 	}
 	
-	//runs the dialogue specific to character's ap and location (if at a club)
-	//dialogue is chosen randomly from an arraylist determined by potential()
+	// runs the dialogue specific to character's ap and location (if at a club)
+	// dialogue is chosen randomly from an array determined by potential()
+	// the previous dialogue choice is saved so it is not repeated
+	// in the case the location or ap (due to user response) stays the same
 	public void speak(){
 		
 		day = set.day;
@@ -22,9 +25,11 @@ public class Aera extends Character{
 				intro = true;
 			}
 			else{
+				// in case ap decreases to 0 due to user response (currently not possible)
 				System.out.println("Aera: ...");
 			}
 		}
+		// if ap is 3, or user response causes ap to skip 3, acquire phone number
 		else if(ap > 2 && !phone){
 			System.out.println("Aera: Hey, um, here's my number for the English project.");
 			phone = true;
@@ -34,6 +39,7 @@ public class Aera extends Character{
 			int random = 0;
 			String[] d = potential();
 			
+			// maybe change this to simply remove previous from array so looping is unnecessary
 			while(previous.compareTo(speech) == 0){
 				random = (int)((d.length - 1) * Math.random());
 				speech = d[random];
@@ -47,6 +53,8 @@ public class Aera extends Character{
 			previous = speech;
 		}
 		
+		// ap increases every time you talk to the character
+		// but it may stay the same in the case of certain responses
 		ap++;
 		
 		sc.nextLine();
@@ -62,6 +70,8 @@ public class Aera extends Character{
 		String[] p;
 		int i = 0;
 		
+		// if the player is at home, there is no location-specific dialogue
+		// otherwise there are 3 ap specific dialogues, and 2 location specific ones
 		if(time < 2)
 			p = new String[5];
 		else p = new String[3];
@@ -127,59 +137,52 @@ public class Aera extends Character{
 			}
 		}
 		
-		if(ap == 1){
-			p[i] = "Oh, hi.";
-			p[i + 1] = "Hey, what are your thoughts on the multiverse theory?";
-			p[i + 2] = "Did you need something?";
-		}
-		else if(ap == 2){
-			p[i] = "Hey.";
-			p[i + 1] = "I'm not really a fan of sunny days.";
-			p[i + 2] = "It's too sunny out...";
-		}
-		else if(ap == 4){
-			p[i] = "How's it going?";
-			p[i + 1] = "Hey, you should meet my bird sometime.";
-			p[i + 2] = "Oh man, my bird is so cute.";
-		}
-		else if(ap == 5){
-			p[i] = "'Sup.";
-			p[i + 1] = "Hey, do you prefer the city or quiet towns like this?";
-			p[i + 2] = "Man, this town is so boring.";
-		}
-		else if(ap == 6){
-			p[i] = "What's up?";
-			p[i + 1] = "Hey, what kind of classes are you taking?";
-			p[i + 2] = "Oh man, I have so much homework.";
-		}
-		else if(ap == 7){
-			p[i] = "Hey!";
-			p[i + 1] = "Yeah, I know everyone's birthday. Which reminds me; today is my sister's birthday.";
-			p[i + 2] = "I should call my sister since today's her birthday...";
-		}
-		else if(ap == 8){
-			p[i] = "I should water my plants when I get home.";
-			p[i + 1] = "Hey, what kind of music do you listen to?";
-			p[i + 2] = "I wanna go home...";
-		}
-		else if(ap == 9){
-			p[i] = "Man, I haven't written in my book in a while...";
-			p[i + 1] = "Out of curiosity, what is your weapon of choice?";
-			p[i + 2] = "I really want to play the piano right now...";
-		}
-		else if(ap == 10){
-			p[i] = "I could so do with a cup of tea right now.";
-			p[i + 1] = "Do you drink tea?";
-			p[i + 2] = "I should play video games when I get home...";
+		switch(ap){
+		case 1:	p[i] = "Oh, hi.";
+				p[i + 1] = "Hey, what are your thoughts on the multiverse theory?";
+				p[i + 2] = "Did you need something?";
+				break;
+		case 2:	p[i] = "Hey.";
+				p[i + 1] = "I'm not really a fan of sunny days.";
+				p[i + 2] = "It's too sunny out...";
+				break;
+		case 4:	p[i] = "How's it going?";
+				p[i + 1] = "Hey, you should meet my bird sometime.";
+				p[i + 2] = "Oh man, my bird is so cute.";
+				break;
+		case 5:	p[i] = "'Sup.";
+				p[i + 1] = "Hey, do you prefer the city or quiet towns like this?";
+				p[i + 2] = "Man, this town is so boring.";
+				break;
+		case 6:	p[i] = "What's up?";
+				p[i + 1] = "Hey, what kind of classes are you taking?";
+				p[i + 2] = "Oh man, I have so much homework.";
+				break;
+		case 7:	p[i] = "Hey!";
+				p[i + 1] = "Yeah, I know everyone's birthday. Which reminds me; today is my sister's birthday.";
+				p[i + 2] = "I should call my sister since today's her birthday...";
+				break;
+		case 8:	p[i] = "I should water my plants when I get home.";
+				p[i + 1] = "Hey, what kind of music do you listen to?";
+				p[i + 2] = "I wanna go home...";
+				break;
+		case 9:	p[i] = "Man, I haven't written in my book in a while...";
+				p[i + 1] = "Out of curiosity, what is your weapon of choice?";
+				p[i + 2] = "I really want to play the piano right now...";
+				break;
+		case 10:p[i] = "I could so do with a cup of tea right now.";
+				p[i + 1] = "Do you drink tea?";
+				p[i + 2] = "I should play video games when I get home...";
+				break;
 		}
 		
 		return p;
 	}
 	
-	//not done with this method
-	//runs the dialogue exchange for dialogue sequences that require user response
-	//takes user input and responds accordingly (in regard to output and ap increment/decrement)
-	// double check to make sure Aera's responses are for the correct choice
+	// UNDER CONSTRUCTION
+	// runs the dialogue exchange for dialogue sequences that require user response
+	// takes user input and responds accordingly (in regard to output and ap increment/decrement)
+	// replace if else statements with switch case
 	private void response(String str){
 		int choice;
 		if(str.compareTo("What they're talking about is really cool, isn't it?") == 0){
@@ -439,7 +442,7 @@ public class Aera extends Character{
 		}
 	}
 	
-	//checks to see which date method should run, depending on the number of dates the player has gone on with this character
+	// checks to see which date method should run, depending on the number of dates the player has gone on with this character
 	public boolean date(){
 		if(dated == 0)
 			return date1();
@@ -448,11 +451,11 @@ public class Aera extends Character{
 		return false;
 	}
 	
-	//checks to see if the player is eligible for dating this character, then reacts accordingly
-	//if all prerequisites are met, the player will go on their first date with this character
-
-	// make sure all choice variables should not be choice variables
+	// checks to see if the player is eligible for dating this character, then reacts accordingly
+	// if all prerequisites are met, the player will go on their first date with this character
+	// replace if else with switch case where it makes sense
 	public boolean date1(){
+		// move checks to be inside date()
 		if(!phone){
 			System.out.println("You do not have her phone number.");
 			sc.nextLine();
@@ -510,7 +513,7 @@ public class Aera extends Character{
 				if(choice == 1 || choice == 2 || choice == 4)
 					dp++;
 				
-				if(choice == 5){
+				if(choice != 5){
 					System.out.println("Aera: Ok, you can pull up a chair and sit here while I cook, if you want.");
 					sc.nextLine();
 					System.out.println("1: Ok.");
@@ -570,6 +573,7 @@ public class Aera extends Character{
 			System.out.println("2: Nah.");	
 			choice = Player.getInt(2);
 			
+			// player can only change their mind a certain number of times before Aera gives up
 			int no = 0;
 			
 			while(no < 3){
@@ -714,8 +718,8 @@ public class Aera extends Character{
 		}
 	}
 	
-	//checks to see if the player is eligible for dating this character for a second time, then reacts accordingly
-	//if all prerequisites are met, the player will go on their second and final date with this character
+	// checks to see if the player is eligible for dating this character for a second time, then reacts accordingly
+	// if all prerequisites are met, the player will go on their second and final date with this character
 	public boolean date2(){
 		if(ap < 15){
 			System.out.println("Aera: Sorry, I'm kind of busy.");
@@ -729,8 +733,8 @@ public class Aera extends Character{
 		}
 	}
 	
-	//checks to see you player has the character's phone number
-	//if player has the number, character greets player and then the dialogue is chosen using speak()
+	// checks to see you player has the character's phone number
+	// if player has the number, character greets player and then the dialogue is chosen using speak()
 	public boolean call(){
 		if(!phone){
 			System.out.println("You do not have her phone number.");

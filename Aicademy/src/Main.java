@@ -1,8 +1,6 @@
 public class Main {
 	
-	// TODO: change user response to switch case instead of if else in Character classes
-	// change void character methods to return boolean so i does not have to be accessed from Setting
-	// remove gender and playerName in characters, replace with user
+	// TODO: remove call() method, make the check part of speak() and have character check time rather than setting
 	
 	public static void main(String[] args) {
 		

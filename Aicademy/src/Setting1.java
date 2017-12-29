@@ -32,17 +32,18 @@ public class Setting1{
 	// creates instance of scanner class to be used across class
 	Scanner sc;
 	
-	// constructor takes the Player created in the main method as a parameter and sets field variables:
-	// user, gender, and playerName as appropriate
+	// constructor takes the Player created in the main method as a parameter
+	// uses scanner variable from player class
 	Setting1(Player p){
 		user = p;
 		sc = user.sc;
 	}
 
 	// sets characters declared above to the characters created in the main method
-	public void getAE(Aera aer){
-		aE = aer;
+	public void getAE(Aera aE){
+		this.aE = aE;
 	}
+	// change the rest of the characters to follow the syntax above
 /*	public void getAN(Antimony ant){
 		aN = ant;
 	}
@@ -80,10 +81,10 @@ public class Setting1{
 	// starts the game, keeping count of time and day
 	// prints the day and time
 	public void timeAndDay(){
+		// game ends at the end of the week or after going on 2 dates with the same character (for now)
 		while(single && day < 5){		
 
 			while(time < 3){
-
 				// change this to switch/case
 				if(day == 0)
 					System.out.print("It's Monday ");
@@ -253,8 +254,8 @@ public class Setting1{
 		return choice;
 	}
 	
-	//tells the player what their choices are in terms of characters to interact with depending on their time, day, and location
-	//returns the number of total choices the player has, including location changes
+	// tells the player what their choices are in terms of characters to interact with depending on their time, day, and location
+	// returns the number of total choices the player has, including location changes
 	public int getCharacters(){
 		int choices;
 		
