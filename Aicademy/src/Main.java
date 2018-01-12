@@ -1,6 +1,10 @@
 public class Main {
 	
 	// TODO: remove call() method, make the check part of speak() and have character check time rather than setting
+	// make an array of Characters, and use that array instead of declaring each Character individually
+	// (use for each loop and maybe a file telling which and how many characters there are)
+	// have the characters hold their location given the time, rather than doing that in the Setting class
+	// when checking for options, loop through array of Characters to see who is there
 	
 	public static void main(String[] args) {
 		
