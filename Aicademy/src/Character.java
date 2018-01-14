@@ -9,8 +9,14 @@ public class Character {
 	public String previous = "";	// previous dialogue; ensures dialogue does not repeat, provided ap increases
 	boolean intro = false;			// whether or not character's name is established; ensures no repeat of introduction in case of no ap increase
 	Scanner sc;						// this should point to the Scanner declared in the Player class, retrieved from Setting
-	public Setting1 set;			// gives access to the following variables in the Setting class:
+	public Setting set;			// gives access to the following variables in the Setting class:
 	public int day;
 	public int time;
+	public int location;
 	public Player user;
+	
+	public boolean present(int time, int day, int location);
+	public boolean date();
+	public boolean call();
+	public void speak();
 }

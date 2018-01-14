@@ -7,7 +7,7 @@ public class Player {
 	//creates a single variable (once the player has been on two dates with the same character, single will be false, and the game will end)
 	public String gender;
 	public String playerName;
-	static Scanner sc = new Scanner(System.in);	// same Scanner variable used throughout entire program
+	static Scanner sc = Main.sc;
 	
 	//constructor sets the name and gender of the player
 	Player(){

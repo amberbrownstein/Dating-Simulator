@@ -1,12 +1,18 @@
 public class Aera extends Character{	
 	// constructor checks to see if genders are compatible and sets set and user
 	// initializes name of the character (starts out as a description until the name is discovered by talking once)
-	Aera(Setting1 s){
-		name = "the quiet girl with long brown hair";
+	Aera(Setting s){
+		name = "the quiet girl with long pink hair";
 		set = s;
 		date = true;
 		user = set.user;
-		sc = set.sc;
+		sc = Main.sc;
+	}
+	
+	public boolean present(int time, int day, int location){
+		if(location == 1)
+			return true;
+		else return false;
 	}
 	
 	// runs the dialogue specific to character's ap and location (if at a club)
@@ -14,9 +20,24 @@ public class Aera extends Character{
 	// the previous dialogue choice is saved so it is not repeated
 	// in the case the location or ap (due to user response) stays the same
 	public void speak(){
-		
 		day = set.day;
 		time = set.time;
+		location = set.location;
+		
+		if(location == 3){
+			if(location == 1){
+				if(dated == 0)
+					date1();
+				else if(dated == 1)
+					date2();
+				return;
+			}
+			else if(location == 2 && !phone){
+				System.out.println("You do not have her phone number.");
+				sc.nextLine();
+				return;
+			}
+		}
 		
 		if(ap == 0){
 			if(!intro){
@@ -442,15 +463,6 @@ public class Aera extends Character{
 		}
 	}
 	
-	// checks to see which date method should run, depending on the number of dates the player has gone on with this character
-	public boolean date(){
-		if(dated == 0)
-			return date1();
-		else if(dated == 1)
-			return date2();
-		return false;
-	}
-	
 	// checks to see if the player is eligible for dating this character, then reacts accordingly
 	// if all prerequisites are met, the player will go on their first date with this character
 	// replace if else with switch case where it makes sense
@@ -729,20 +741,6 @@ public class Aera extends Character{
 		else{
 			
 			set.single = false;
-			return true;
-		}
-	}
-	
-	// checks to see you player has the character's phone number
-	// if player has the number, character greets player and then the dialogue is chosen using speak()
-	public boolean call(){
-		if(!phone){
-			System.out.println("You do not have her phone number.");
-			sc.nextLine();
-			return false;
-		}
-		else{
-			speak();
 			return true;
 		}
 	}
