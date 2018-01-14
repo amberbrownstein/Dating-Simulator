@@ -466,17 +466,17 @@ public class Aera extends Character{
 	// checks to see if the player is eligible for dating this character, then reacts accordingly
 	// if all prerequisites are met, the player will go on their first date with this character
 	// replace if else with switch case where it makes sense
-	public boolean date1(){
+	public void date1(){
 		// move checks to be inside date()
 		if(!phone){
 			System.out.println("You do not have her phone number.");
 			sc.nextLine();
-			return false;
+			return;
 		}
 		else if(!date || ap < 10){
 			System.out.println("Aera: Sorry, I'm kind of busy.");
 			sc.nextLine();
-			return false;
+			return;
 		}
 		else{
 			int dp = 0;
@@ -726,22 +726,22 @@ public class Aera extends Character{
 				ap++;
 			
 			dated++;
-			return true;
+			return;
 		}
 	}
 	
 	// checks to see if the player is eligible for dating this character for a second time, then reacts accordingly
 	// if all prerequisites are met, the player will go on their second and final date with this character
-	public boolean date2(){
+	public void date2(){
 		if(ap < 15){
 			System.out.println("Aera: Sorry, I'm kind of busy.");
 			sc.nextLine();
-			return false;
+			return;
 		}
 		else{
 			
 			set.single = false;
-			return true;
+			return;
 		}
 	}
 }

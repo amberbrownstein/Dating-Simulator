@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
 	// TODO: make it so that the Characters can be read and created from a file
 	// fix the Character class so that it can contain method declarations
-	// make main's scanner the universal scanner variable
 	
 	public static Scanner sc = new Scanner(System.in);
 	
