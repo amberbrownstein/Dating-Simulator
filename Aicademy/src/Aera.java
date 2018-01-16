@@ -3,7 +3,6 @@ public class Aera extends Character{
 	// initializes name of the character (starts out as a description until the name is discovered by talking once)
 	Aera(Player p){
 		name = "the quiet girl with long pink hair";
-		date = true;
 		user = p;
 		sc = Main.sc;
 	}
@@ -470,7 +469,7 @@ public class Aera extends Character{
 			sc.nextLine();
 			return;
 		}
-		else if(!date || ap < 10){
+		else if(ap < 10){
 			System.out.println("Aera: Sorry, I'm kind of busy.");
 			sc.nextLine();
 			return;

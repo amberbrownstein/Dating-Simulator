@@ -5,8 +5,8 @@ public class Player {
 	//creates a gender variable for the player (which determines which characters the player can date)
 	//creates a playerName variable for the player
 	//creates a single variable (once the player has been on two dates with the same character, single will be false, and the game will end)
-	public String gender;
-	public String playerName;
+	int gender;
+	String playerName;
 	static Scanner sc = Main.sc;
 	
 	//constructor sets the name and gender of the player
@@ -16,6 +16,7 @@ public class Player {
 	}
 	
 	// program's method for retrieving an int from the user
+	// in this class because all classes have access to the Player class
 	public static int getInt(int choices){
 		int choice;
 		while(true){
@@ -37,28 +38,18 @@ public class Player {
 	
 	//sets the gender of the player
 	private void getGender(){
-		boolean trueGender = false;
+		boolean valid = false;
 		String correct;
 		
-		while(!trueGender){
+		while(!valid){
 			System.out.println("Please choose a gender for your character.");
 			System.out.println("1: boy");
 			System.out.println("2: girl");
 			System.out.println("3: other");
 		
-			int valid = getInt(3);
+			gender = getInt(3);
 			
-			if(valid == 1){
-				gender = "boy";
-			}
-			else if(valid == 2){
-				gender = "girl";
-			}
-			else if(valid == 3){
-				gender = "other";
-			}
-			
-			if(valid != 3){
+			if(gender != 3){
 				System.out.println("You are a " + gender + " correct?");
 				correct = sc.nextLine();
 			}
@@ -73,7 +64,7 @@ public class Player {
 			}
 				
 			if(correct.compareTo("yes") == 0){
-				trueGender = true;
+				valid = true;
 				System.out.println("Then your gender will be " + gender + ".");
 			}
 		}
