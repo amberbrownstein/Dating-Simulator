@@ -20,7 +20,7 @@ public class Aera extends Character{
 	// in the case the location or ap (due to user response) stays the same
 	@Override
 	public void speak(int time, int day, int location){
-		if(location == 3){
+		if(time == 3){
 			if(location == 1){
 				if(dated == 0)
 					date1();
