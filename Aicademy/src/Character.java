@@ -15,8 +15,6 @@ public class Character {
 	public int location;
 	public Player user;
 	
-	public boolean present(int time, int day, int location);
-	public boolean date();
-	public boolean call();
-	public void speak();
+	public boolean present(int time, int day, int location){return false;}
+	public void speak(){}
 }

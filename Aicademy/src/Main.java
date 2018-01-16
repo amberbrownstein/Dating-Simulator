@@ -1,30 +1,19 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.Scanner;
 
 public class Main {
-	// TODO: make it so that the Characters can be read and created from a file
-	// fix the Character class so that it can contain method declarations
+	// TODO: add visuals, finish dialogue, write second date, add second week, finish then add the other characters
 	
 	public static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		String line;
-		BufferedReader br = new BufferedReader(new FileReader("characters.txt"));
-		
 		// prompts the user to create a Player, and creates a Setting object
 		Player p = new Player();
 		Setting s = new Setting(p);
 		
-		// creates an array of Characters, retrieving the length and Characters from a text file
-		Character[]  chars = new Character[Integer.parseInt(br.readLine())];
-		
-		for(int i = 0; i < chars.length; i++){
-			String temp = br.readLine();
-			chars[i] = new temp(s);
-		}
-		
-		br.close();
+		// creates an array of Characters
+		// length 1 for now, but will be longer once other Characters are added
+		Character[]  chars = new Character[1];
+		chars[0] = new Aera(s);
 		
 		// gives Setting class access to the characters
 		s.getChars(chars);

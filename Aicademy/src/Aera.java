@@ -9,6 +9,7 @@ public class Aera extends Character{
 		sc = Main.sc;
 	}
 	
+	@Override
 	public boolean present(int time, int day, int location){
 		if(location == 1)
 			return true;
@@ -19,6 +20,7 @@ public class Aera extends Character{
 	// dialogue is chosen randomly from an array determined by potential()
 	// the previous dialogue choice is saved so it is not repeated
 	// in the case the location or ap (due to user response) stays the same
+	@Override
 	public void speak(){
 		day = set.day;
 		time = set.time;
