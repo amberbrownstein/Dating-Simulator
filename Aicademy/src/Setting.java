@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Setting{
 	
 	// declares field variables to be used throughout the class
-	// for now at least, rather than using getter methods for these variables
 	boolean single = true;
 	private Player user;
 	private int day = 0;
