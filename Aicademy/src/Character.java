@@ -16,5 +16,5 @@ public class Character {
 	public Player user;
 	
 	public boolean present(int time, int day, int location){return false;}
-	public void speak(){}
+	public void speak(int time, int day, int location){}
 }

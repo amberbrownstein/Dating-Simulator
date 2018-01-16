@@ -1,11 +1,10 @@
 public class Aera extends Character{	
 	// constructor checks to see if genders are compatible and sets set and user
 	// initializes name of the character (starts out as a description until the name is discovered by talking once)
-	Aera(Setting s){
+	Aera(Player p){
 		name = "the quiet girl with long pink hair";
-		set = s;
 		date = true;
-		user = set.user;
+		user = p;
 		sc = Main.sc;
 	}
 	
@@ -21,11 +20,7 @@ public class Aera extends Character{
 	// the previous dialogue choice is saved so it is not repeated
 	// in the case the location or ap (due to user response) stays the same
 	@Override
-	public void speak(){
-		day = set.day;
-		time = set.time;
-		location = set.location;
-		
+	public void speak(int time, int day, int location){
 		if(location == 3){
 			if(location == 1){
 				if(dated == 0)
@@ -742,7 +737,6 @@ public class Aera extends Character{
 		}
 		else{
 			
-			set.single = false;
 			return;
 		}
 	}

@@ -6,20 +6,16 @@ public class Main {
 	public static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		// prompts the user to create a Player, and creates a Setting object
+		// prompts the user to create a Player
 		Player p = new Player();
-		Setting s = new Setting(p);
 		
 		// creates an array of Characters
 		// length 1 for now, but will be longer once other Characters are added
 		Character[]  chars = new Character[1];
-		chars[0] = new Aera(s);
+		chars[0] = new Aera(p);
 		
-		// gives Setting class access to the characters
-		s.getChars(chars);
-
-		// begins the game
-		s.timeAndDay();
+		//begins game
+		new Setting(p, chars);
 		
 		// prints a message when the game is over
 		System.out.println("Thanks for playing!");

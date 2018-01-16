@@ -5,11 +5,11 @@ public class Setting{
 	// declares field variables to be used throughout the class
 	// public variables are used in other classes (generally Characters)
 	// for now at least, rather than using getter methods for these variables
-	public boolean single = true;
-	public Player user;
-	public int day = 0;
-	public int time = 0;
-	public int location;	// 0-2: active, neutral, and passive
+	boolean single = true;
+	private Player user;
+	private int day = 0;
+	private int time = 0;
+	private int location;	// 0-2: active, neutral, and passive
 	private int act;		// number of actions successfully completed within the time slot, max of 2 per time
 	private String active;
 	private String neutral;
@@ -18,16 +18,14 @@ public class Setting{
 	private Scanner sc;
 	private Character[] speakable;
 	
-	void getChars(Character[] characters){
-		chars = characters;
-		speakable = new Character[chars.length];
-	}
-	
 	// constructor takes the Player created in the main method as a parameter
 	// uses scanner variable from player class
-	Setting(Player p){
+	Setting(Player p, Character[] c){
 		user = p;
+		chars = c;
+		speakable = new Character[chars.length];
 		sc = Main.sc;
+		timeAndDay();
 	}
 
 	// starts the game, keeping count of time and day
@@ -99,7 +97,11 @@ public class Setting{
 			int choice = options();
 			
 			if(location > 0 && choice > 2){
-				speakable[choice - 2].speak();
+				speakable[choice - 3].speak(time, day, location);
+				if(speakable[choice - 3].dated == 2){
+					single = false;
+					return;
+				}
 				act++;
 			}
 		}
@@ -221,18 +223,18 @@ public class Setting{
 				if(location == 1){
 					choices++;
 					System.out.println(choices + ": Hang out with " + chars[i].name + ".");
-					speakable[choices - 2] = chars[i];
+					speakable[choices - 3] = chars[i];
 				}
 				else if(location == 2){
 					choices++;
 					System.out.println(choices + ": Call " + chars[i].name + ".");
-					speakable[choices - 2] = chars[i];
+					speakable[choices - 3] = chars[i];
 				}
 			}
 			else if(chars[i].present(time, day, location)){
 				choices++;
 				System.out.println(choices + ": Talk to " + chars[i].name + ".");
-				speakable[choices - 2] = chars[i];
+				speakable[choices - 3] = chars[i];
 			}
 		}
 		
