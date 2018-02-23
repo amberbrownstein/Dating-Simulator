@@ -19,20 +19,20 @@ public class Aera extends Character{
 	// the previous dialogue choice is saved so it is not repeated
 	// in the case the location or ap (due to user response) stays the same
 	@Override
-	public void speak(int time, int day, int location){
+	public int speak(int time, int day, int location){
 		if(time == 3){
-			if(location == 1){
-				if(dated == 0)
-					date1();
-				else if(dated == 1)
-					date2();
-				return;
-			}
-			else if(location == 2 && !phone){
+			if(!phone){
 				System.out.println("You do not have her phone number.");
 				sc.nextLine();
-				return;
+				return 0;
 			}
+			else if(location == 1){
+				if(dated == 0)
+					return date1();
+				else if(dated == 1)
+					return date2();
+				return 0;
+			}	
 		}
 		
 		if(ap == 0){
@@ -47,7 +47,7 @@ public class Aera extends Character{
 			}
 		}
 		// if ap is 3, or user response causes ap to skip 3, acquire phone number
-		else if(ap > 2 && !phone){
+		else if(!phone && ap > 2){
 			System.out.println("Aera: Hey, um, here's my number for the English project.");
 			phone = true;
 		}
@@ -72,9 +72,9 @@ public class Aera extends Character{
 		
 		// ap increases every time you talk to the character
 		// but it may stay the same in the case of certain responses
-		ap++;
-		
+		ap++;	
 		sc.nextLine();
+		return 1;
 		
 	}
 	
@@ -462,17 +462,11 @@ public class Aera extends Character{
 	// checks to see if the player is eligible for dating this character, then reacts accordingly
 	// if all prerequisites are met, the player will go on their first date with this character
 	// replace if else with switch case where it makes sense
-	public void date1(){
-		// move checks to be inside date()
-		if(!phone){
-			System.out.println("You do not have her phone number.");
-			sc.nextLine();
-			return;
-		}
-		else if(ap < 10){
+	public int date1(){
+		if(ap < 10){
 			System.out.println("Aera: Sorry, I'm kind of busy.");
 			sc.nextLine();
-			return;
+			return 0;
 		}
 		else{
 			int dp = 0;
@@ -722,21 +716,22 @@ public class Aera extends Character{
 				ap++;
 			
 			dated++;
-			return;
+			return 2;
 		}
 	}
 	
 	// checks to see if the player is eligible for dating this character for a second time, then reacts accordingly
 	// if all prerequisites are met, the player will go on their second and final date with this character
-	public void date2(){
+	public int date2(){
 		if(ap < 15){
 			System.out.println("Aera: Sorry, I'm kind of busy.");
 			sc.nextLine();
-			return;
+			return 0;
 		}
 		else{
 			
-			return;
+			dated++;
+			return 2;
 		}
 	}
 }

@@ -95,12 +95,12 @@ public class Setting{
 			int choice = options();
 			
 			if(location > 0 && choice > 2){
-				speakable[choice - 3].speak(time, day, location);
+				int temp = speakable[choice - 3].speak(time, day, location);
 				if(speakable[choice - 3].dated == 2){
 					single = false;
 					return;
 				}
-				act++;
+				act = act + temp;
 			}
 		}
 		

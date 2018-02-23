@@ -49,12 +49,16 @@ public class Player {
 		
 			gender = getInt(3);
 			
-			if(gender != 3){
-				System.out.println("You are a " + gender + " correct?");
+			if(gender == 1){
+				System.out.println("You are a boy, correct?");
+				correct = sc.nextLine();
+			}
+			else if(gender == 2){
+				System.out.println("You are a girl, correct?");
 				correct = sc.nextLine();
 			}
 			else{
-				System.out.println("You are " + gender + " correct?");
+				System.out.println("You are other, correct?");
 				correct = sc.nextLine();
 			}
 				
@@ -62,10 +66,9 @@ public class Player {
 				System.out.println("Please answer yes or no");
 				correct = sc.nextLine();
 			}
-				
+			
 			if(correct.compareTo("yes") == 0){
 				valid = true;
-				System.out.println("Then your gender will be " + gender + ".");
 			}
 		}
 		
